@@ -1,7 +1,7 @@
 package com.inflearn.testcode.controller;
 
 import com.inflearn.testcode.model.dto.UserResponse;
-import com.inflearn.testcode.servoce.UserService;
+import com.inflearn.testcode.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
