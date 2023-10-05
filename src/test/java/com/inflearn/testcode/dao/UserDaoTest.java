@@ -28,24 +28,24 @@ class UserDaoTest {
         UserStatus status = UserStatus.ACTIVE;
 
         // when
-        Optional<UserEntity> result = userDao.findByIdAndStatus(id, status);
+        UserEntity result = userDao.findByIdAndStatus(id, status);
 
         // then
-        assertThat(result.isEmpty()).isFalse();
+        assertThat(result).isNotNull();
     }
 
     @Test
-    void USER의_아이디와_상태를_사용하여_USER를_찾을_수_없다면_Optional_Empty를_반환한다() {
+    void USER의_아이디와_상태를_사용하여_USER를_찾을_수_없다면_빈_객체를_반환한다() {
 
         // given
         long id = 2L;
         UserStatus status = UserStatus.ACTIVE;
 
         // when
-        Optional<UserEntity> result = userDao.findByIdAndStatus(id, status);
+        UserEntity result = userDao.findByIdAndStatus(id, status);
 
         // then
-        assertThat(result.isEmpty()).isTrue();
+        assertThat(result).isNull();
     }
 
     @Test
@@ -56,23 +56,23 @@ class UserDaoTest {
         UserStatus status = UserStatus.ACTIVE;
 
         // when
-        Optional<UserEntity> result = userDao.findByEmailAndStatus(email, status);
+        UserEntity result = userDao.findByEmailAndStatus(email, status);
 
         // then
-        assertThat(result.isEmpty()).isFalse();
+        assertThat(result).isNotNull();
     }
 
     @Test
-    void USER의_이메일과_상태를_사용하여_USER를_찾을_수_없다면_Optional_Empty를_반환한다() {
+    void USER의_이메일과_상태를_사용하여_USER를_찾을_수_없다면_빈_객체를_반환한다() {
 
         // given
         String email = "test111@naver.com";
         UserStatus status = UserStatus.ACTIVE;
 
         // when
-        Optional<UserEntity> result = userDao.findByEmailAndStatus(email, status);
+        UserEntity result = userDao.findByEmailAndStatus(email, status);
 
         // then
-        assertThat(result.isEmpty()).isTrue();
+        assertThat(result).isNull();
     }
 }

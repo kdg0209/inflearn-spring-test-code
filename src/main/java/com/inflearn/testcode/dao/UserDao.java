@@ -1,7 +1,9 @@
 package com.inflearn.testcode.dao;
 
+import com.inflearn.testcode.exception.ResourceNotFoundException;
 import com.inflearn.testcode.model.UserStatus;
 import com.inflearn.testcode.repository.UserEntity;
+import com.inflearn.testcode.repository.UserRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -17,8 +19,14 @@ import static com.inflearn.testcode.repository.QUserEntity.userEntity;
 public class UserDao {
 
     private final JPAQueryFactory queryFactory;
+    private final UserRepository userRepository;
 
-    public Optional<UserEntity> findByIdAndStatus(long id, UserStatus status) {
+    public UserEntity findById(long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Users", id));
+    }
+
+    public UserEntity findByIdAndStatus(long id, UserStatus status) {
         UserEntity result = queryFactory
                 .selectFrom(userEntity)
                 .where(
@@ -27,10 +35,11 @@ public class UserDao {
                 )
                 .fetchFirst();
 
-        return Optional.ofNullable(result);
+        return Optional.ofNullable(result)
+                .orElseThrow(() -> new ResourceNotFoundException("Users", id));
     }
 
-    public Optional<UserEntity> findByEmailAndStatus(String email, UserStatus status) {
+    public UserEntity findByEmailAndStatus(String email, UserStatus status) {
         UserEntity result = queryFactory
                 .selectFrom(userEntity)
                 .where(
@@ -39,6 +48,20 @@ public class UserDao {
                 )
                 .fetchFirst();
 
-        return Optional.ofNullable(result);
+        return Optional.ofNullable(result)
+                .orElseThrow(() -> new ResourceNotFoundException("Users", email));
+    }
+
+    public UserEntity getByIdOrElseThrow(long id) {
+        UserEntity result = queryFactory
+                .selectFrom(userEntity)
+                .where(
+                        userEntity.id.eq(id),
+                        userEntity.status.eq(UserStatus.ACTIVE)
+                )
+                .fetchFirst();
+
+        return Optional.ofNullable(result)
+                .orElseThrow(() -> new ResourceNotFoundException("Users", id));
     }
 }
