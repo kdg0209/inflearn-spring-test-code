@@ -52,7 +52,7 @@ public class UserService {
                 .certificationCode(UUID.randomUUID().toString())
                 .build();
 
-        userEntity = userRepository.save(userEntity);
+        userEntity = userRepository.save(newUserEntity);
         return userEntity;
     }
 
