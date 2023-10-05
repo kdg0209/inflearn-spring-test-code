@@ -52,7 +52,7 @@ public class UserDao {
                 .orElseThrow(() -> new ResourceNotFoundException("Users", email));
     }
 
-    public UserEntity getByIdOrElseThrow(long id) {
+    public UserEntity getByI(long id) {
         UserEntity result = queryFactory
                 .selectFrom(userEntity)
                 .where(

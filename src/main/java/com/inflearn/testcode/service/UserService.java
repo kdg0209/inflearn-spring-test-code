@@ -25,7 +25,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final JavaMailSender mailSender;
 
-    public UserEntity createUser(UserCreateDto userCreateDto) {
+    public UserEntity create(UserCreateDto userCreateDto) {
         UserEntity userEntity = UserEntity.builder()
                 .email(userCreateDto.getEmail())
                 .nickname(userCreateDto.getNickname())
@@ -40,9 +40,8 @@ public class UserService {
         return userEntity;
     }
 
-    @Transactional
-    public UserEntity updateUser(long id, UserUpdateDto userUpdateDto) {
-        UserEntity userEntity = userDao.getByIdOrElseThrow(id);
+    public UserEntity update(long id, UserUpdateDto userUpdateDto) {
+        UserEntity userEntity = userDao.getByI(id);
 
         UserEntity newUserEntity = UserEntity.builder()
                 .id(userEntity.getId())
@@ -57,13 +56,11 @@ public class UserService {
         return userEntity;
     }
 
-    @Transactional
     public void login(long id) {
         UserEntity userEntity = userDao.findById(id);
         userEntity.setLastLoginAt(Clock.systemUTC().millis());
     }
 
-    @Transactional
     public void verifyEmail(long id, String certificationCode) {
         UserEntity userEntity = userDao.findById(id);
         if (!certificationCode.equals(userEntity.getCertificationCode())) {
