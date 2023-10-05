@@ -2,7 +2,6 @@ package com.inflearn.testcode.service;
 
 import com.inflearn.testcode.dao.PostDao;
 import com.inflearn.testcode.dao.UserDao;
-import com.inflearn.testcode.exception.ResourceNotFoundException;
 import com.inflearn.testcode.model.dto.PostCreateDto;
 import com.inflearn.testcode.model.dto.PostUpdateDto;
 import com.inflearn.testcode.repository.PostEntity;
