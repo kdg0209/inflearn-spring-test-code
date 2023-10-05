@@ -41,7 +41,7 @@ public class UserService {
     }
 
     public UserEntity update(long id, UserUpdateDto userUpdateDto) {
-        UserEntity userEntity = userDao.getByI(id);
+        UserEntity userEntity = userDao.getById(id);
 
         UserEntity newUserEntity = UserEntity.builder()
                 .id(userEntity.getId())

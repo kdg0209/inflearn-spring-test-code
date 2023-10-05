@@ -24,7 +24,7 @@ public class PostService {
     private final PostRepository postRepository;
 
     public PostEntity create(PostCreateDto postCreateDto) {
-        UserEntity userEntity = userDao.getByI(postCreateDto.getWriterId());
+        UserEntity userEntity = userDao.getById(postCreateDto.getWriterId());
         PostEntity postEntity = new PostEntity();
         postEntity.setWriter(userEntity);
         postEntity.setContent(postCreateDto.getContent());

@@ -52,7 +52,7 @@ public class UserDao {
                 .orElseThrow(() -> new ResourceNotFoundException("Users", email));
     }
 
-    public UserEntity getByI(long id) {
+    public UserEntity getById(long id) {
         UserEntity result = queryFactory
                 .selectFrom(userEntity)
                 .where(
@@ -63,5 +63,18 @@ public class UserDao {
 
         return Optional.ofNullable(result)
                 .orElseThrow(() -> new ResourceNotFoundException("Users", id));
+    }
+
+    public UserEntity getByEmail(String email) {
+        UserEntity result = queryFactory
+                .selectFrom(userEntity)
+                .where(
+                        userEntity.email.eq(email),
+                        userEntity.status.eq(UserStatus.ACTIVE)
+                )
+                .fetchFirst();
+
+        return Optional.ofNullable(result)
+                .orElseThrow(() -> new ResourceNotFoundException("Users", email));
     }
 }

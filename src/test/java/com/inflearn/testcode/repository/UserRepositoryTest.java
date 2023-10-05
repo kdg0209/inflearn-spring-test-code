@@ -22,7 +22,7 @@ class UserRepositoryTest {
         UserEntity userEntity = UserEntity.builder()
                 .email("test@naver.com")
                 .address("Seoul")
-                .nickName("test")
+                .nickname("test")
                 .status(UserStatus.ACTIVE)
                 .certificationCode("qwer")
                 .build();
@@ -34,7 +34,7 @@ class UserRepositoryTest {
         assertThat(result.getId()).isNotNull();
         assertThat(result.getEmail()).isEqualTo("test@naver.com");
         assertThat(result.getAddress()).isEqualTo("Seoul");
-        assertThat(result.getNickName()).isEqualTo("test");
+        assertThat(result.getNickname()).isEqualTo("test");
         assertThat(result.getStatus()).isEqualTo(UserStatus.ACTIVE);
         assertThat(result.getCertificationCode()).isEqualTo("qwer");
     }
